@@ -1,6 +1,6 @@
 package com.pluralsight;
 
-public class payments {
+public class Payments {
 
 
 }

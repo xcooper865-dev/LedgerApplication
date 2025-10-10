@@ -1,14 +1,18 @@
 package com.pluralsight;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.logging.ConsoleHandler;
 
 public class Main {
+    public static ArrayList<Payments> payments = gettransactionFromFile();
+
     public static void main(String[] args) {
 
+       
 
         String mainMenu = """
-        
+    -------------------------------    
         1 - Add Deposit
         
         2 - Make Payment
@@ -16,12 +20,12 @@ public class Main {
         3 - Ledger
         
         4 - Exit
-        
+    ----------------------------------    
         """;
 
         while(true){
             System.out.println(mainMenu);
-            int command = ConsoleHandler.promptForInt("ENTER YOUR SELECTION");
+            char command = ConsoleHelper.promtForChar("ENTER YOUR SELECTION");
             switch (command){
                 case 1:
                     AddDeposit();
@@ -41,6 +45,30 @@ public class Main {
 
         }
     }
+//Leadger goes here
+
+        String Leadger = """
+                -----------------------
+                     1 - All
+                
+                     2 - Deposits
+                
+                     3 - Payments
+                
+                     4 - Reports   
+                
+                
+                 -----------------------       
+                """;
+
+        while (true){
+
+        System.out.println(Ledger);
+        char command = ConsoleHelper.promtForChar("");
+    }
+    private static <transaction> ArrayList<transaction> gettransactionFromFile() {
+            return;
+    }
 
     private static void AddDeposit(){
         System.out.println("Make a Deposit");
@@ -53,7 +81,12 @@ public class Main {
     private static void Ledger(){
 
     }
-    public class ConsoleHelper{
-        
-    }
+
+        public static class ConsoleHelper{
+            public static int promtForInt(String enterYourSelection) {
+            }
+
+           public static Character promtForChar(String enterYourSelection) {
+            }
+        }
 }
