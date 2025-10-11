@@ -15,6 +15,9 @@ private Double Amount;
         Date = date;
     }
 
+    public Payments(String date, String description, String vendor, double amount) {
+    }
+
 
     public String getDate() {
         return Date;
@@ -35,6 +38,9 @@ private Double Amount;
     public Double getAmount() {
         return Amount;
     }
-
+@Override
+    public String toString(){
+        return Date + ","+ Time + ","+ Description +","+ Vendor+ ","+Amount;
+}
 
     }

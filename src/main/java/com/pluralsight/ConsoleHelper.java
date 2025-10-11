@@ -12,7 +12,17 @@ private static Scanner scanner = new Scanner(System.in);
        return scanner.nextInt();
 
     }
-  //  public static char promtForChar(String enterYourSelection) {
+    private static void saveTransactionToFile(Payments payment) {
+        try (java.io.FileWriter writer = new java.io.FileWriter("transactions.csv", true)) {
+            writer.write(payment.toString() + "\n");
+        } catch (Exception e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+        }
+    }
+
+
+
+    //  public static char promtForChar(String enterYourSelection) {
     // System.out.println(prompt + ": ");
       //  return scanner.nextLine();
     }
