@@ -53,7 +53,7 @@ public class Main {
             }
         }
     }
-
+         //Report menu
     private static void Reports() {
         System.out.println("");
         String reports = """
@@ -196,11 +196,30 @@ private static final String CSV_FILE = "trasaction.csv";
 
 
 
-    private static void MakePayment(){
-        System.out.println("Please Make A Payment Here");
+    private static void MakePayment() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Enter Date(YYYY_MM_DD)");
+       String date = scanner.nextLine();
+
+        System.out.println("Enter Description");
+        String description = scanner.nextLine();
+
+        System.out.println("Enter amount");
+        String vendor = scanner.nextLine();
+
+        System.out.println("Enter amount");
+        double amount = scanner.nextDouble();
+        scanner.nextLine();
+
+        Payments payment = new Payments(date,description,vendor,amount);
+
+        savetransactionTOFile(payment);
+        System.out.println("Payment saved successfully");
+
 
     }
-
+         //Ledger menu
     private static void Ledger(){
 
         String Ledger = """
