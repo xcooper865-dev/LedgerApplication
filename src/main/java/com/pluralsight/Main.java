@@ -1,6 +1,8 @@
 package com.pluralsight;
 
 import javax.imageio.IIOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLOutput;
@@ -127,18 +129,46 @@ public class Main {
     }
     // End of Ledger
     public static void payment() {
-        System.out.println("Show my Payments");
-        String date;
-        double amount;
-        String description;
+        System.out.println("\n=== PAYMENTS ONLY ====");
+        displayTransactionFromCSV();
+
     }
 
     private static void Deposits() {
-        System.out.println("Show my Deposits");
+        System.out.println("\n=== DEPOSITS===");
+        displayTransactionFromCSV();
     }
 
     private static void All() {
-        System.out.println("Show all transactions");
+        System.out.println("\n=== ALL TRANSACTIONS");
+        displayTransactionFromCSV();
+    }
+    private static void displayTransactionFromCSV() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE))) {
+            String line;
+            System.out.println("Date     |  Description    | Vendor      |  Amount");
+            System.out.println("-".repeat(70));
+
+            reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+
+                if (parts.length ==4){
+                    String date = parts[0];
+                    String description = parts[1];
+                    String vendor = parts[2];
+                    String amount = parts[3];
+
+                    System.out.printf("%s  | %-16s  |  %-16   |   $%s%n",date,description,vendor,amount);
+            }
+        }
+            System.out.println("-".repeat(70)+"|n");
+
+    } catch (IOException e){
+            System.out.println("Error reading transaction"+e.getMessage());
+        }
+
     }
 //Start of Ledger
 
@@ -223,18 +253,18 @@ private static final String CSV_FILE = "trasaction.csv";
     private static void Ledger(){
 
         String Ledger = """
-                            Ledger
-                    -----------------------
-                         1 - All
+                                    Ledger
+                             -----------------------
+                                  1 - All
                     
-                         2 - Deposits
+                                  2 - Deposits
                     
-                         3 - Payments
+                                  3 - Payments
                     
-                         4 - Reports   
+                                  4 - Reports   
                     
                     
-                     -----------------------    
+                            -----------------------    
                                      page:3   
                     """;
 
