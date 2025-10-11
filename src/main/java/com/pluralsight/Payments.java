@@ -7,7 +7,7 @@ private String Description;
 private String Vendor;
 private Double Amount;
 
-    public Payments(Double amount, String vendor, String description, String time, String date) {
+    public Payments(double amount, String vendor, String description, String time, String date) {
         Amount = amount;
         Vendor = vendor;
         Description = description;
@@ -35,4 +35,6 @@ private Double Amount;
     public Double getAmount() {
         return Amount;
     }
-}
+
+
+    }

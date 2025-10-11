@@ -7,9 +7,10 @@ private static Scanner scanner = new Scanner(System.in);
 
     public static int promtForInt(String prompt) {
         System.out.println(prompt + ": ");
-        int result = scanner.nextInt();
-        scanner.nextLine();
-        return result;
+        Scanner scanner = new Scanner(System.in);
+        //int result = scanner.nextInt();
+       return scanner.nextInt();
+
     }
   //  public static char promtForChar(String enterYourSelection) {
     // System.out.println(prompt + ": ");
