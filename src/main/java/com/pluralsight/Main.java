@@ -16,7 +16,7 @@ public class Main {
 
         String mainMenu = """
                            Main Menu
-                -------------------------------    
+                -------------------------------------    
                     1 - Add Deposit
                 
                     2 - Make Payment
@@ -24,7 +24,7 @@ public class Main {
                     3 - Ledger
                 
                     4 - Exit
-                ----------------------------------    
+                -------------------------------------    
                                             page:1
                 """;
         boolean running = true;
@@ -57,8 +57,8 @@ public class Main {
     private static void Reports() {
         System.out.println("");
         String reports = """
-                       REPORTS
-                ----------------------   
+                         REPORTS
+                ---------------------------   
                    1 - Month To Date
                 
                    2 - Previos Month
@@ -107,6 +107,7 @@ public class Main {
             }
         }
     }
+
     // ask cx to search by vendor
     private static void SearchByVendor() {
 
@@ -154,6 +155,7 @@ public class Main {
         }
     }
 
+    // ask cx to search by previous year
     private static void PreviousYear() {
         //date
         int currentYear = java.time.LocalDate.now().getYear();
@@ -215,14 +217,67 @@ public class Main {
 
         }
 
+   // ask cx to search by Year
     private static void YearToDate() {
+        java.time.LocalDate today = java.time.LocalDate.now();
+        int currentYear = today.getYear();
+        java.time.LocalDate startOfYear = java.time.LocalDate.of(currentYear,1,1);
+
+        try(BufferedReader reader = new BufferedReader(new FileReader(CSV_FILE))){
+            String line;
+            System.out.println("\n===  YEAR TO DATE ("+ startOfYear +"to"+ today+")===");
+            System.out.println("   Date    |    Description     |   Vendor    |  Amount  ");
+            System.out.println("-------------------------------------------------------------");
+
+            reader.readLine();
+            boolean found = false;
+            double totalAmount = 0;
+
+            while ((line = reader.readLine()) != null){
+                String[] parts = line.split("-");
+
+                if(parts.length>=3){
+                    String dateStart = parts[0].trim();
+                    try {
+                        java.time.LocalDate transactionDate = java.time.LocalDate.parse(dateStart);
+                        if(! transactionDate.isBefore(startOfYear)  && !transactionDate.isAfter(today)){
+                            found = true;
+                            double amount = Double.parseDouble((parts[3]).trim());
+                            totalAmount += amount;
+              //System.out.printf not println
+                            System.out.printf("%-10s     |   %-16s     |   %-16s    |$%.2f%n",
+                            dateStart,
+                            parts[1].trim(),
+                            parts[2].trim(),
+                            amount);
+                        }
+
+                    }catch (Exception e){
+
+                    }
+                }
+
+            }
+            if (!found){
+                System.out.println("No transactions found");
+
+            }else {
+                System.out.println("--------------------------------");
+                System.out.printf("Total  $%.2f%n",totalAmount);
+
+            }
+        }catch (IOException e){
+            System.out.println("Error reading CSV file"+e.getMessage());
+        }
     }  //TODO
 
+      // ask cx to search by the month
     private static void PreviousMonth() {
     }  //TODO
-    // start of reports menu
+
 
     private static void MonthToDate() {
+        // start of reports menu
 
 //TODO
     }
@@ -384,7 +439,7 @@ public class Main {
 //            System.out.println(p);
         }
 
-
+              // your asking the cx to make a payment here
         private static void MakePayment () throws IOException {
             Scanner scanner = new Scanner(System.in);
 
