@@ -1,37 +1,68 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class ConsoleHelper {
-private static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
 
-    public static int promtForInt(String prompt) {
-        System.out.println(prompt + ": ");
-        Scanner scanner = new Scanner(System.in);
-        //int result = scanner.nextInt();
-       return scanner.nextInt();
-
+    public static int promptForInt(String prompt) {
+        System.out.print(prompt + ": ");
+        int result = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+        return result;
     }
-    private static void saveTransactionToFile(Payments payment) {
-        try (java.io.FileWriter writer = new java.io.FileWriter("transactions.csv", true)) {
-            writer.write(payment.toString() + "\n");
-        } catch (Exception e) {
-            System.out.println("Error writing to file: " + e.getMessage());
+
+    public static double promptForDouble(String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt + ": ");
+                String input = scanner.nextLine();
+                return Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a valid number.");
+            }
+        }
+    }
+
+    public static String promptForString(String prompt) {
+        System.out.print(prompt + ": ");
+        return scanner.nextLine();
+    }
+
+    public static LocalDate promptForDate(String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt + ": ");
+                String dateAsString = scanner.nextLine();
+                return LocalDate.parse(dateAsString);
+            } catch (Exception ex) {
+                System.out.println("Invalid entry! Please enter a valid date (YYYY-MM-DD).");
+            }
+        }
+    }
+
+    public static LocalTime promptForTime(String prompt) {
+        while (true) {
+            try {
+                System.out.print(prompt + ": ");
+                String timeAsString = scanner.nextLine();
+                return LocalTime.parse(timeAsString);
+            } catch (Exception ex) {
+                System.out.println("Invalid entry! Please enter a valid time (HH:MM:SS).");
+            }
         }
     }
 
 
 
-    //  public static char promtForChar(String enterYourSelection) {
-    // System.out.println(prompt + ": ");
-      //  return scanner.nextLine();
+    //public static String promtForInt(String enYourSelection) {
+        //return 1;
     }
 
-
-
-
-
-
-
+//    public static int promtForInt(String enterYourSelection) {
+//
+//    return 0;
 
 

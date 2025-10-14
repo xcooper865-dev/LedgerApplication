@@ -1,95 +1,59 @@
 date|time|description|vendor|amount
-2023-04-15|10:13:25|ergonomic keyboard|Amazon|-89.50
-2023-04-15|11:15:00|Invoice 1001 paid|Joe|1500.00
-2023-04-16|08:30:15|office supplies|Staples|-45.99
-2023-04-16|09:45:00|client payment received|ABC Corp|2500.00
-2023-04-17|12:00:00|lunch meeting|Restaurant XYZ|-28.50
-2023-04-17|14:30:15|software subscription|Adobe|-54.99
-2023-04-18|10:15:00|travel reimbursement|John Smith|350.00
-2023-04-18|16:45:30|parking|City Parking|-12.00
-2023-04-19|09:00:00|monthly rent|Landlord Property|-1200.00
-2023-04-19|11:30:15|internet bill|Comcast|-79.99
-2023-04-20|08:45:00|client deposit|XYZ Solutions|5000.00
-2023-04-20|13:20:30|equipment repair|Tech Services|-150.00
-2023-04-21|10:00:15|office coffee|Brewster's Cafe|-45.00
-2023-04-21|15:30:00|Invoice 1002 paid|Sarah Johnson|1200.00
-2023-04-22|09:15:00|marketing materials|Print House|-320.00
-2023-04-22|14:45:30|project milestone payment|ClientCo|3000.00
-2023-04-23|11:00:00|conference registration|EventBrite|-299.99
-2023-04-23|16:15:15|taxi ride|Uber|-23.50
-2023-04-24|08:30:00|quarterly bonus|Company Payroll|2000.00
-2023-04-24|12:45:30|office furniture|IKEA|-275.00
-2023-04-25|09:00:15|consulting fee received|New Client|1800.00
-2023-04-25|14:20:00|utilities payment|Electric Co|-95.50
-2023-04-26|10:30:00|bank transfer in|Savings Account|500.00
-2023-04-26|15:45:15|inventory purchase|Supplier ABC|-680.00
-2023-04-27|08:15:00|sales commission|Company|750.00
-2023-04-27|13:00:30|office phone bill|Verizon|-65.00
-2023-04-28|11:45:00|client retainer|Design Client|2000.00
-2023-04-28|16:20:15|shipping supplies|UPS Store|-89.99
-2023-04-29|09:30:00|payroll deposit|Employer|3500.00
-2023-04-29|14:15:30|cleaning service|ServiceCo|-120.00
-2023-04-30|10:00:15|monthly subscription|Adobe|-54.99
-2023-04-30|15:30:00|invoice payment received|Company A|2250.00
-2023-05-01|08:45:00|office rent|Landlord|-1200.00
-2023-05-01|12:00:30|promotional giveaways|Marketing Dept|-180.00
-2023-05-02|09:15:00|client payment|New Solutions|3500.00
-2023-05-02|14:45:15|fuel expense|Shell Gas|-52.75
-2023-05-03|11:00:00|team lunch|Restaurant Downtown|-145.50
-2023-05-03|16:30:30|book purchase|Amazon|-35.99
-2023-05-04|08:30:15|invoice from vendor|Tech Supplier|-420.00
-2023-05-04|13:45:00|project payment|ClientCorp|1950.00
-2023-05-05|10:15:00|insurance premium|State Farm|-185.00
-2023-05-05|15:20:30|office snacks|Trader Joe's|-67.50
-2023-05-06|09:00:00|retainer payment received|Law Firm|1500.00
-2023-05-06|14:30:15|equipment maintenance|Tech Services|-95.00
-2023-05-07|11:45:00|travel accommodation|Hotel Booking|850.00
-2023-05-07|16:00:30|copier rental|Office Equipment|-75.00
-2023-05-08|08:15:00|bonus payout|Company|-500.00
-2023-05-08|13:00:15|supplier invoice|Manufacturing Co|-1250.00
-2023-05-09|10:30:00|client payment|Digital Media|2800.00
-2023-05-09|15:45:30|parking permit|City Municipal|-40.00
-2023-05-10|09:00:15|monthly service|Cloud Provider|-99.99
-2023-05-10|14:15:00|invoice payment|Services LLC|1600.00
-2023-05-11|11:00:00|office equipment|Staples|-280.00
-2023-05-11|16:30:30|freelance payment|Contractor|900.00
-2023-05-12|08:45:00|bank interest|Bank Account|15.23
-2023-05-12|13:20:15|shipping cost|FedEx|-48.50
-2023-05-13|10:00:00|client advance|Project Client|4000.00
-2023-05-13|15:30:30|office maintenance|Facilities|-165.00
-2023-05-14|09:15:00|paycheck deposit|Employer|3500.00
-2023-05-14|14:45:15|meal expense|Business Lunch|-72.00
-2023-05-15|11:30:00|subscription renewal|Software Co|-129.99
-2023-05-15|16:00:30|tax payment|IRS|-2000.00
-2023-05-16|08:30:15|vendor payment|Office Supplier|-450.00
-2023-05-16|13:00:00|client invoice paid|ABC Industries|3200.00
-2023-05-17|10:15:00|conference fee|Professional Assoc|-199.99
-2023-05-17|15:20:30|travel meal|Restaurant|-35.00
-2023-05-18|09:00:00|bonus payment received|Company|1500.00
-2023-05-18|14:30:15|equipment purchase|Electronics Store|-325.00
-2023-05-19|11:45:00|client retainer|Marketing Firm|2500.00
-2023-05-19|16:15:30|office supplies|Amazon Business|-98.50
-2023-05-20|08:15:00|deposit received|Sales Order|2750.00
-2023-05-20|13:00:30|utility bill|Water Co|-55.00
-2023-05-21|10:30:00|salary deposit|Payroll|3500.00
-2023-05-21|15:45:15|office decor|Home Depot|-125.00
-2023-05-22|09:00:15|freelance work income|Client Upwork|800.00
-2023-05-22|14:20:00|insurance payment|Progressive|-275.00
-2023-05-23|11:15:00|invoice received|Contractor Bill|-550.00
-2023-05-23|16:30:30|client payment|Tech Solutions|2100.00
-2023-05-24|08:45:00|monthly rent|Property Mgmt|-1200.00
-2023-05-24|13:15:15|office supply order|Grainger|-340.00
-2023-05-25|10:00:00|project payment|Client XYZ|3100.00
-2023-05-25|15:45:30|transit pass|Public Transit|-75.00
-2023-05-26|09:30:00|paycheck|Company Payroll|3500.00
-2023-05-26|14:00:15|meal reimbursement|Team Event|-89.99
-2023-05-27|11:00:00|consulting income|Freelance Client|1200.00
-2023-05-27|16:20:30|office phone|Mobile Carrier|-45.00
-2023-05-28|08:30:15|vendor invoice|Supplier XYZ|-890.00
-2023-05-28|13:45:00|client deposit|Project Firm|2800.00
-2023-05-29|10:15:00|bank transfer|Savings|-500.00
-2023-05-29|15:30:30|maintenance fee|Building Mgmt|-120.00
-2023-05-30|09:00:00|income payment|Consulting|1500.00
-2023-05-30|14:15:15|office supplies|Office Depot|-145.00
-2023-05-31|11:45:00|monthly invoice|Service Provider|2200.00
-2023-05-31|16:00:30|travel expense|Airline|-425.00
+2023-05-18|09:00:15|travel reimbursement|Finance Dept|650.00
+2023-05-19|14:45:00|monthly rent|Landlord|-1200.00
+2023-05-20|10:00:15|software tools|GitHub|-20.00
+2023-05-21|16:00:00|freelance income|Remote Client|950.00
+2023-06-01|08:30:00|project milestone payment|ClientCo|3100.00
+2023-06-02|09:15:30|team meeting lunch|Panera|-85.00
+2023-06-03|11:45:00|monthly phone bill|Verizon|-69.00
+2023-06-04|13:30:15|client deposit|Acme Corp|4000.00
+2023-06-05|15:15:00|office supplies|Office Depot|-120.00
+2024-01-10|09:00:00|client payment|BlueSky LLC|4200.00
+2024-01-12|13:15:30|software renewal|Microsoft|-350.00
+2024-01-14|10:45:00|website hosting|GoDaddy|-120.00
+2024-02-01|08:30:15|equipment upgrade|Apple Store|-999.99
+2024-02-03|11:20:00|training workshop|Udemy|-45.00
+2024-02-05|09:30:00|consulting payment|Creative Partners|1800.00
+2024-02-10|12:45:15|office coffee service|Starbucks|-75.00
+2024-03-01|08:15:00|client retainer|Innovate LLC|2500.00
+2024-03-02|14:00:30|internet bill|Comcast|-89.99
+2024-03-05|10:45:00|software subscription|Canva|-12.99
+2024-03-08|11:30:15|client invoice paid|ABC Designs|3100.00
+2024-03-12|13:20:00|printer maintenance|TechFix|-150.00
+2024-03-15|09:00:00|marketing campaign|AdWorks|-500.00
+2024-04-01|08:45:00|client deposit|NextPhase|5000.00
+2024-04-03|10:15:15|conference ticket|EventBrite|-249.00
+2024-04-05|12:30:00|vendor refund|Office Depot|75.00
+2024-04-08|09:00:15|monthly rent|Landlord|-1250.00
+2024-04-10|14:00:00|web design fee|ClientOne|1800.00
+2024-05-02|09:15:00|software license|JetBrains|-249.00
+2024-05-05|11:00:15|client payment|VisionTech|3400.00
+2024-06-10|08:30:00|office supplies|Staples|-98.75
+2024-06-15|14:30:30|client deposit|BrightPath|4100.00
+2024-07-01|10:45:00|office rent|Landlord|-1300.00
+2024-07-05|13:00:15|IT support contract|TechPros|-250.00
+2024-08-12|09:30:00|client invoice paid|BlueStar|3600.00
+2024-08-18|16:00:15|coffee order|Brewster's|-45.00
+2024-09-01|08:30:00|monthly subscription|QuickBooks|-60.00
+2024-09-10|12:00:30|freelance payment|RemoteClient|2000.00
+2025-01-05|09:00:00|project completion payment|ClientHub|4200.00
+2025-01-08|13:15:15|software renewal|Adobe|-59.99
+2025-01-10|11:30:00|office chair purchase|IKEA|-220.00
+2025-02-02|10:15:00|client retainer|BrightLine|3000.00
+2025-02-06|08:45:30|printer toner|Staples|-75.00
+2025-03-01|09:00:00|client payment|MegaCorp|5500.00
+2025-03-04|11:45:15|team meeting catering|Panera|-150.00
+2025-04-10|10:30:00|training seminar|SkillShare|-120.00
+2025-04-14|13:00:30|client deposit|DesignWave|2800.00
+2025-05-02|09:15:00|business insurance|State Farm|-410.00
+2025-05-08|15:20:15|consulting revenue|TechEdge|2200.00
+2025-06-05|08:30:00|equipment upgrade|Best Buy|-980.00
+2025-06-12|10:45:15|client payment|GreenCorp|3700.00
+2025-07-01|09:00:00|office rent|Landlord|-1350.00
+2025-07-03|11:15:30|internet bill|Spectrum|-89.99
+2025-08-09|08:45:00|client invoice paid|BrightWorks|2500.00
+2025-08-14|14:30:15|marketing expense|Facebook Ads|-200.00
+2025-09-05|09:15:00|software subscription|Slack|-12.50
+2025-09-10|13:45:00|client payment|Apex Digital|4300.00
+2025-10-01|08:30:15|monthly subscription|Google Workspace|-25.00
+2025-10-05|10:00:00|project milestone|ClientTech|5200.00

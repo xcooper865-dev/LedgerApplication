@@ -1,46 +1,54 @@
 package com.pluralsight;
 
-public class Payments {
-private String Date;
-private String Time;
-private String Description;
-private String Vendor;
-private Double Amount;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-    public Payments(double amount, String vendor, String description, String time, String date) {
-        Amount = amount;
-        Vendor = vendor;
-        Description = description;
-        Time = time;
-        Date = date;
+public class Payments {
+private LocalDate date;
+private LocalTime time;
+private String description;
+private String vendor;
+private double amount;
+
+    public Payments(LocalDate date, LocalTime time, String description, String vendor, double amount) {
+    this.date = date;
+    this.time = time;
+    this.description = description;
+    this.vendor = vendor;
+    this.amount = amount;
     }
 
     public Payments(String date, String description, String vendor, double amount) {
     }
 
-
-    public String getDate() {
-        return Date;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public String getTime() {
-        return Time;
+    public LocalTime getTime() {
+        return time;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public String getVendor() {
-        return Vendor;
+        return vendor;
     }
 
     public Double getAmount() {
-        return Amount;
+        return amount;
     }
-@Override
-    public String toString(){
-        return Date + ","+ Time + ","+ Description +","+ Vendor+ ","+Amount;
+
+    @Override
+    public String toString() {
+        return date + "," + time + "," + description + "," + vendor + "," + amount;
+    }
+
+
 }
 
-    }
+
+
+
