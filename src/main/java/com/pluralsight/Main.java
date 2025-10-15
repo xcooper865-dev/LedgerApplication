@@ -186,47 +186,50 @@ public class Main {
     private static void searchByVendor() { //find transactions by the vendor
         String vendor = ConsoleHelper.promptForString("Enter vendor name").toLowerCase();//asking the user for the vendor name & converting sting into lowercase
         payments.stream()
-                      //checkin if vendor name contains the search
+                      //checking if vendor name contains the search
                 .filter(p -> p.getVendor().toLowerCase().contains(vendor))
                 .forEach(System.out::println);                      //contain allows for partal matches
     }               //print all matching descriptions
 
     // ------------------- FILE HELPERS -------------------
     private static void saveTransactionToFile(Payments transaction) throws IOException {
-        boolean fileExists = new File(CSV_FILE).exists();
+        boolean fileExists = new File(CSV_FILE).exists();// checks if file exist
 
-        try (FileWriter writer = new FileWriter(CSV_FILE, true)) {
-            if (!fileExists) {
+                                      //opens the file in append mode
+        try (FileWriter writer = new FileWriter(CSV_FILE, true)) {//if true it won't erase the old data
+
+            if (!fileExists) {   // if the file IS new you will write the column header first
                 writer.write("date,time,description,vendor,amount\n");
             }
-            writer.write(String.format("%s,%s,%s,%s,%.2f%n",
-                    transaction.getDate(),
-                    transaction.getTime(),
-                    transaction.getDescription(),
-                    transaction.getVendor(),
-                    transaction.getAmount()));
+            writer.write(String.format("%s,%s,%s,%s,%.2f%n",  //writing one line to the CVS including all the payment info
+                    transaction.getDate(),  //payment Date
+                    transaction.getTime(),//payment Time
+                    transaction.getDescription(), //payment Description
+                    transaction.getVendor(),  //vendor of payment going to
+                    transaction.getAmount())); // Amount
         }
     }
 
     private static void loadTransactionsFromFile() {
-        File file = new File(CSV_FILE);
-        if (!file.exists()) return;
+        File file = new File(CSV_FILE);//file object being created that represents the CSV file
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        if (!file.exists()) return; //If the file doesn't exist the method stops avoiding errors
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {// closes File Reader
             reader.readLine(); // skip header
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {// reads the line until it retruns null= nothing
                 String[] parts = line.split(",");
-                if (parts.length < 5) continue;
+                if (parts.length < 5) continue;//if the line doesn't have 5 parts skip
 
-                Payments p = new Payments(
-                        LocalDate.parse(parts[0]),
-                        LocalTime.parse(parts[1]),
-                        parts[2],
-                        parts[3],
-                        Double.parseDouble(parts[4])
+                Payments p = new Payments( // creates a new payment object using the data above
+                        LocalDate.parse(parts[0]), //Date
+                        LocalTime.parse(parts[1]),//Time
+                        parts[2],        //Description
+                        parts[3],       //vendor
+                        Double.parseDouble(parts[4]) //amount
                 );
-                payments.add(p);
+                payments.add(p); // add payment object to payment list
             }
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
