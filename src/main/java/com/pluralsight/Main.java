@@ -12,58 +12,58 @@ public class Main {
     public static void main(String[] args) throws IOException {
         loadTransactionsFromFile();
 
-        while (true) {
+        while (true) {  //loop keeps going until user presses D
             System.out.println("""
                     =============================
                         Home Screen
                     =============================
-                    D) Add Deposit
-                    P) Make Payment (Debit)
-                    L) Ledger
-                    X) Exit
+                    A) Add Deposit
+                    B) Make Payment (Debit)
+                    C) Ledger
+                    D) Exit
                     -----------------------------
                     """);
 
-            String choice = ConsoleHelper.promptForString("Enter your choice").trim().toUpperCase();
+            String choice = ConsoleHelper.promptForString("Enter your choice").trim().toUpperCase(); // user can press a or A app still works
 
             switch (choice) {
-                case "D" -> addDeposit();
-                case "P" -> makePayment();
-                case "L" -> ledgerMenu();
-                case "X" -> {
+                case "A" -> addDeposit();  // adding money
+                case "B" -> makePayment(); //money leaving out
+                case "C" -> ledgerMenu();  //viewing trasiactions
+                case "D" -> {              // quit
                     System.out.println("Goodbye!");
-                    return;
+                    return;  //application ends
                 }
                 default -> System.out.println("Invalid choice. Please try again.");
             }
         }
     }
-
+    //    Start of main menu
     // ------------------- ADD DEPOSIT -------------------
     private static void addDeposit() throws IOException {
-        LocalDate date = ConsoleHelper.promptForDate("Enter Date (YYYY-MM-DD)");
+        LocalDate date = ConsoleHelper.promptForDate("Enter Date (YYYY-MM-DD)");  //collect the information from user
         LocalTime time = ConsoleHelper.promptForTime("Enter Time (HH:MM:SS)");
         String description = ConsoleHelper.promptForString("Enter Description");
         String vendor = ConsoleHelper.promptForString("Enter Vendor");
         double amount = ConsoleHelper.promptForDouble("Enter Deposit Amount");
-
+         //adding descripion date vendor and amount to deposit & saving deposit
         Payments deposit = new Payments(date, time, description, vendor, amount);
-        saveTransactionToFile(deposit);
-        payments.add(deposit);
+        saveTransactionToFile(deposit); //saving deposit to csv
+        payments.add(deposit); //adding the deposit t
 
         System.out.println("Deposit saved successfully!\n");
     }
 
     // ------------------- MAKE PAYMENT -------------------
     private static void makePayment() throws IOException {
-        LocalDate date = ConsoleHelper.promptForDate("Enter Date (YYYY-MM-DD)");
+        LocalDate date = ConsoleHelper.promptForDate("Enter Date (YYYY-MM-DD)");//collect the information from user
         LocalTime time = ConsoleHelper.promptForTime("Enter Time (HH:MM:SS)");
         String description = ConsoleHelper.promptForString("Enter Description");
         String vendor = ConsoleHelper.promptForString("Enter Vendor");
         double amount = ConsoleHelper.promptForDouble("Enter Payment Amount");
-
-        Payments payment = new Payments(date, time, description, vendor, -Math.abs(amount)); // store as negative
-        saveTransactionToFile(payment);
+        // saving date time description vendor                        // basically money leaving the account
+        Payments payment = new Payments(date, time, description, vendor, -Math.abs(amount));
+        saveTransactionToFile(payment); //saving payment to csv
         payments.add(payment);
 
         System.out.println("Payment saved successfully!\n");
@@ -102,15 +102,15 @@ public class Main {
     // ------------------- DISPLAY TRANSACTIONS -------------------
     private static void displayTransactions(String filter) {
         List<Payments> sorted = new ArrayList<>(payments);
-        sorted.sort((a, b) -> b.getDate().compareTo(a.getDate())); // newest first
+        sorted.sort((a, b) -> b.getDate().compareTo(a.getDate())); // sort transaction newest to oldest
 
         System.out.printf("%-12s | %-8s | %-20s | %-15s | %10s%n",
                 "Date", "Time", "Description", "Vendor", "Amount");
         System.out.println("-".repeat(70));
 
-        for (Payments p : sorted) {
-            if (filter.equals("DEPOSITS") && p.getAmount() < 0) continue;
-            if (filter.equals("PAYMENTS") && p.getAmount() >= 0) continue;
+        for (Payments p : sorted) { //loop through transactions
+            if (filter.equals("DEPOSITS") && p.getAmount() < 0) continue;  //deposits show only skips if negitive
+            if (filter.equals("PAYMENTS") && p.getAmount() >= 0) continue;// payments show only skips if positive
             System.out.printf("%-12s | %-8s | %-20s | %-15s | $%10.2f%n",
                     p.getDate(), p.getTime(), p.getDescription(), p.getVendor(), p.getAmount());
         }
@@ -119,12 +119,12 @@ public class Main {
 
     // ------------------- REPORTS MENU -------------------
     private static void reportsMenu() {
-        while (true) {
+        while (true) { // loop keeps going until user presses 0
             System.out.println("""
                     =============================
                              Reports
                     =============================
-                    1) Month To Date
+                    1) Month To Date  
                     2) Previous Month
                     3) Year To Date
                     4) Previous Year
@@ -136,13 +136,13 @@ public class Main {
             String choice = ConsoleHelper.promptForString("Enter your choice");
 
             switch (choice) {
-                case "1" -> reportMonthToDate();
-                case "2" -> reportPreviousMonth();
-                case "3" -> reportYearToDate();
-                case "4" -> reportPreviousYear();
-                case "5" -> searchByVendor();
-                case "0" -> {
-                    return;
+                case "1" -> reportMonthToDate(); // showing current month transactions
+                case "2" -> reportPreviousMonth();//showing previous month transactions
+                case "3" -> reportYearToDate();// show the current year to date
+                case "4" -> reportPreviousYear();// show transactions from last year
+                case "5" -> searchByVendor();//search by vendor
+                case "0" -> { // going back to the ledger menu
+                    return; //going back to ledger
                 }
                 default -> System.out.println("Invalid choice.");
             }
@@ -150,42 +150,46 @@ public class Main {
     }
 
     // ------------------- REPORT IMPLEMENTATIONS -------------------
-    private static void reportMonthToDate() {
+    private static void reportMonthToDate() {// show transaction from 1st day of the month
         LocalDate now = LocalDate.now();
+        payments.stream() //convrting the arraylist into a stream
+
+                //filter keeps transactions from the current month and year
+                .filter(p -> p.getDate().getYear() == now.getYear() //return same year
+                        && p.getDate().getMonth() == now.getMonth())  //return same month
+                .forEach(System.out::println); //print the matching transaction and calling each string to  that payment
+    }
+
+    private static void reportPreviousMonth() {  //show transactio from previous month
+        LocalDate now = LocalDate.now().minusMonths(1);//going back to the previous month by 1
         payments.stream()
-                .filter(p -> p.getDate().getYear() == now.getYear()
+                .filter(p -> p.getDate().getYear() == now.getYear() // filter & keeps transactions from the previous month by year and month
                         && p.getDate().getMonth() == now.getMonth())
-                .forEach(System.out::println);
+                .forEach(System.out::println);//print matching transactions
     }
 
-    private static void reportPreviousMonth() {
-        LocalDate now = LocalDate.now().minusMonths(1);
-        payments.stream()
-                .filter(p -> p.getDate().getYear() == now.getYear()
-                        && p.getDate().getMonth() == now.getMonth())
-                .forEach(System.out::println);
+    private static void reportYearToDate() {// show all transactions from the start of year until now
+        int year = LocalDate.now().getYear();//current year
+
+        payments.stream() //filter and keeps transaction from the current year
+                .filter(p -> p.getDate().getYear() == year)  //transaction from current year
+                .forEach(System.out::println); //print the matching transactions
     }
 
-    private static void reportYearToDate() {
-        int year = LocalDate.now().getYear();
+    private static void reportPreviousYear() { // show all transactions from the last year
+        int year = LocalDate.now().getYear() - 1;// calculating the previous year( minus 1)
         payments.stream()
-                .filter(p -> p.getDate().getYear() == year)
-                .forEach(System.out::println);
+                .filter(p -> p.getDate().getYear() == year) // filter and keep transactions from previous year
+                .forEach(System.out::println);// print all the matching transactions
     }
 
-    private static void reportPreviousYear() {
-        int year = LocalDate.now().getYear() - 1;
+    private static void searchByVendor() { //find transactions by the vendor
+        String vendor = ConsoleHelper.promptForString("Enter vendor name").toLowerCase();//asking the user for the vendor name & converting sting into lowercase
         payments.stream()
-                .filter(p -> p.getDate().getYear() == year)
-                .forEach(System.out::println);
-    }
-
-    private static void searchByVendor() {
-        String vendor = ConsoleHelper.promptForString("Enter vendor name").toLowerCase();
-        payments.stream()
+                      //checkin if vendor name contains the search
                 .filter(p -> p.getVendor().toLowerCase().contains(vendor))
-                .forEach(System.out::println);
-    }
+                .forEach(System.out::println);                      //contain allows for partal matches
+    }               //print all matching descriptions
 
     // ------------------- FILE HELPERS -------------------
     private static void saveTransactionToFile(Payments transaction) throws IOException {
