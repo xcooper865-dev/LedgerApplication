@@ -22,6 +22,7 @@ public class Main {
                     C) Ledger
                     D) Exit
                     -----------------------------
+                                           page.1
                     """);
 
             String choice = ConsoleHelper.promptForString("Enter your choice").trim().toUpperCase(); // user can press a or A app still works
@@ -46,6 +47,7 @@ public class Main {
         String description = ConsoleHelper.promptForString("Enter Description");
         String vendor = ConsoleHelper.promptForString("Enter Vendor");
         double amount = ConsoleHelper.promptForDouble("Enter Deposit Amount");
+
          //adding descripion date vendor and amount to deposit & saving deposit
         Payments deposit = new Payments(date, time, description, vendor, amount);
         saveTransactionToFile(deposit); //saving deposit to csv
@@ -82,6 +84,7 @@ public class Main {
                     R) Reports
                     H) Home
                     -----------------------------
+                                           page.2
                     """);
 
             String choice = ConsoleHelper.promptForString("Enter your choice").trim().toUpperCase();
@@ -131,6 +134,7 @@ public class Main {
                     5) Search by Vendor
                     0) Back
                     -----------------------------
+                                            page.3
                     """);
 
             String choice = ConsoleHelper.promptForString("Enter your choice");
@@ -152,7 +156,7 @@ public class Main {
     // ------------------- REPORT IMPLEMENTATIONS -------------------
     private static void reportMonthToDate() {// show transaction from 1st day of the month
         LocalDate now = LocalDate.now();
-        payments.stream() //convrting the arraylist into a stream
+        payments.stream() //converting the arraylist into a stream
 
                 //filter keeps transactions from the current month and year
                 .filter(p -> p.getDate().getYear() == now.getYear() //return same year
@@ -200,7 +204,8 @@ public class Main {
 
             if (!fileExists) {   // if the file IS new you will write the column header first
                 writer.write("date,time,description,vendor,amount\n");
-            }
+
+            }    //%s string date,time,description,vendor //%.2f%n round the number two decimal places
             writer.write(String.format("%s,%s,%s,%s,%.2f%n",  //writing one line to the CVS including all the payment info
                     transaction.getDate(),  //payment Date
                     transaction.getTime(),//payment Time
