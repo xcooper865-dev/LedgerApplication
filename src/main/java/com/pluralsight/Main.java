@@ -28,14 +28,20 @@ public class Main {
             String choice = ConsoleHelper.promptForString("Enter your choice").trim().toUpperCase(); // user can press a or A app still works
 
             switch (choice) {
-                case "A" -> addDeposit();  // adding money
-                case "B" -> makePayment(); //money leaving out
-                case "C" -> ledgerMenu();  //viewing trasiactions
-                case "D" -> {              // quit
+                case "A":
+                    addDeposit();// adding money
+                    break;
+                case "B":
+                    makePayment();//money leaving out
+                    break;
+                case "C":
+                    ledgerMenu();//viewing trasiactions
+                    break;
+                case "D": {              // quit
                     System.out.println("Goodbye!");
                     return;  //application ends
                 }
-                default -> System.out.println("Invalid choice. Please try again.");
+                default: System.out.println("Invalid choice. Please try again.");
             }
         }
     }
@@ -90,14 +96,21 @@ public class Main {
             String choice = ConsoleHelper.promptForString("Enter your choice").trim().toUpperCase();
 
             switch (choice) {
-                case "A" -> displayTransactions("ALL");
-                case "D" -> displayTransactions("DEPOSITS");
-                case "P" -> displayTransactions("PAYMENTS");
-                case "R" -> reportsMenu();
-                case "H" -> {
+                case "A":
+                    displayTransactions("ALL");
+                    break;
+                case "D":
+                    displayTransactions("DEPOSITS");
+                break;
+                case "P" :displayTransactions("PAYMENTS");
+                break;
+                case "R":
+                    reportsMenu();
+                    break;
+                case "H": {
                     return;
                 }
-                default -> System.out.println("Invalid choice.");
+                default: System.out.println("Invalid choice.");
             }
         }
     }
@@ -139,16 +152,26 @@ public class Main {
 
             String choice = ConsoleHelper.promptForString("Enter your choice");
 
-            switch (choice) {
-                case "1" -> reportMonthToDate(); // showing current month transactions
-                case "2" -> reportPreviousMonth();//showing previous month transactions
-                case "3" -> reportYearToDate();// show the current year to date
-                case "4" -> reportPreviousYear();// show transactions from last year
-                case "5" -> searchByVendor();//search by vendor
-                case "0" -> { // going back to the ledger menu
+            switch (choice) {  //alternate -> arrow syntax allows for the use of no breaks
+                case "1":
+                    reportMonthToDate(); // showing current month transactions
+                    break;
+                case "2":
+                    reportPreviousMonth();//showing previous month transactions
+                    break;
+                case "3":
+                    reportYearToDate();// show the current year to date
+                    break;
+                case "4":
+                    reportPreviousYear();// show transactions from last year
+                    break;
+                case "5":
+                    searchByVendor();//search by vendor
+                    break;
+                case "0":{ // going back to the ledger menu
                     return; //going back to ledger
                 }
-                default -> System.out.println("Invalid choice.");
+                default: System.out.println("Invalid choice.");
             }
         }
     }

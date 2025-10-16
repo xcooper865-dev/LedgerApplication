@@ -8,3 +8,5 @@ date,time,description,vendor,amount
 2025-10-30,22:22:22,car payment,BMW,-700.00
 2025-05-11,22:22:22,car,pay,1000.00
 2025-05-11,22:22:22,gas,bp,100.00
+2025-03-10,22:22:22,deposit,payment,1000.00
+2025-02-03,22:22:22,bp,bp,10000.00
