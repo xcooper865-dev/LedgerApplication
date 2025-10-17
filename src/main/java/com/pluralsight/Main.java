@@ -127,7 +127,7 @@ public class Main {
 
     // ------------------- DISPLAY TRANSACTIONS -------------------
     //this method handles all three view modes
-    //when the filter is all neither of the filter checks will match one another allowing you to see both pos+ and neg-
+    //when the filter is all neither of the filter checks will match one another allowing you to see both pos+ and neg- numbers
     private static void displayTransactions(String filter) {//filter can be "ALL", "DEPOSITS", or "PAYMENTS"
 
         List<Payments> sorted = new ArrayList<>(payments);// creates a copy of the payments list
@@ -144,8 +144,10 @@ public class Main {
 
             if (filter.equals("PAYMENTS") && p.getAmount() >= 0) continue;// payments show only skips if positive
                                                                           // opposite of (deposit) only negitive numbers show
+            //if showing payments and the amount is positive (deposit) then continue only negitive numbers pass through
 
-            System.out.printf("%-12s | %-8s | %-20s | %-15s | $%10.2f%n", //this line prints everything only if the filter is equal to all
+            System.out.printf("%-12s | %-8s | %-20s | %-15s | $%10.2f%n", //this line prints everything
+
                                                     //if the filter is equal to deposits and all negitives were skipped print deposit pos+
                                                     //if the filter is equal to payment and all positives were skipped print payment neg-
                     p.getDate(), p.getTime(), p.getDescription(), p.getVendor(), p.getAmount());
