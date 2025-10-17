@@ -127,6 +127,7 @@ public class Main {
 
     // ------------------- DISPLAY TRANSACTIONS -------------------
     //this method handles all three view modes
+    //when the filter is all neither of the filter checks will match one another allowing you to see both pos+ and neg-
     private static void displayTransactions(String filter) {//filter can be "ALL", "DEPOSITS", or "PAYMENTS"
 
         List<Payments> sorted = new ArrayList<>(payments);// creates a copy of the payments list
@@ -135,16 +136,18 @@ public class Main {
         System.out.println("----------------------------------------------------------------------------");
         System.out.printf("%-12s | %-8s | %-20s | %-15s | %10s%n",
                 "Date", "Time", "Description", "Vendor", "Amount");
-        System.out.println("-".repeat(70));
+        System.out.println("-".repeat(80));
 
         for (Payments p : sorted) { //loop through transactions //p is the current Payment object
             if (filter.equals("DEPOSITS") && p.getAmount() < 0) continue;  //deposits show only skips if negitve
-                   // If showing deposits and the amount is negative (payment) then continue only positive numbers pass
+                   // If showing deposits and the amount is negative (payment) then continue only positive numbers pass through
 
             if (filter.equals("PAYMENTS") && p.getAmount() >= 0) continue;// payments show only skips if positive
                                                                           // opposite of (deposit) only negitive numbers show
 
-            System.out.printf("%-12s | %-8s | %-20s | %-15s | $%10.2f%n",
+            System.out.printf("%-12s | %-8s | %-20s | %-15s | $%10.2f%n", //this line prints everything only if the filter is equal to all
+                                                    //if the filter is equal to deposits and all negitives were skipped print deposit pos+
+                                                    //if the filter is equal to payment and all positives were skipped print payment neg-
                     p.getDate(), p.getTime(), p.getDescription(), p.getVendor(), p.getAmount());
         }
         System.out.println();
@@ -220,7 +223,7 @@ public class Main {
                 .forEach(System.out::println);//print matching transactions
 
     }
-//   
+//
 
     private static void reportYearToDate() {// show all transactions from the start of year until now
         System.out.println("=====================");
