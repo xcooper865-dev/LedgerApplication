@@ -10,3 +10,12 @@ date,time,description,vendor,amount
 2025-05-11,22:22:22,gas,bp,100.00
 2025-03-10,22:22:22,deposit,payment,1000.00
 2025-02-03,22:22:22,bp,bp,10000.00
+2025-05-10,03:23:55,gas,bp,100.00
+2025-10-16,02:13:22,car payment,cars nc,-700.00
+2025-10-16,03:25:22,payment,Goldman Sachs,1000.00
+2025-10-16,04:30:55,car payment,cars.nc,-500.00
+2025-10-16,22:22:22,paycheck,paycheck,1000.00
+2025-10-16,22:22:22,car payment ,cars,-700.00
+2025-03-04,00:00,deposit,Vangard,2500.00
+2023-03-04,00:00,paycheck,Vangard,2500.00
+2024-03-04,00:00,paycheck,Vangard,20000.00

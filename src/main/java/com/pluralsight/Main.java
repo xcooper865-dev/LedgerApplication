@@ -10,9 +10,9 @@ public class Main {
     private static final ArrayList<Payments> payments = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
-        loadTransactionsFromFile();
+        loadTransactionsFromFile(); // Load existing transactions from the CSV file (if it exists)
 
-        while (true) {  //loop keeps going until user presses D
+        while (true) {  //loop keeps main menu running until user presses D or exit
             System.out.println("""
                     =============================
                         Home Screen
@@ -24,18 +24,18 @@ public class Main {
                     -----------------------------
                                            page.1
                     """);
-
-            String choice = ConsoleHelper.promptForString("Enter your choice").trim().toUpperCase(); // user can press a or A app still works
+                                                                                    //.toUppercase meaning case insinsitive
+            String choice = ConsoleHelper.promptForString("Enter your choice").trim().toUpperCase(); // Ask the user for a choice
 
             switch (choice) {
                 case "A":
-                    addDeposit();// adding money
+                    addDeposit();// adding a deposit
                     break;
                 case "B":
-                    makePayment();//money leaving out
+                    makePayment();//money leaving out (debit)
                     break;
                 case "C":
-                    ledgerMenu();//viewing trasiactions
+                    ledgerMenu();//Opens the ledger menu
                     break;
                 case "D": {              // quit
                     System.out.println("Goodbye!");
@@ -46,22 +46,26 @@ public class Main {
         }
     }
     //    Start of main menu
+    //Prompts the user for deposit information (date, time, description, vendor, amount)
+    //    saves it as a positive transaction.
     // ------------------- ADD DEPOSIT -------------------
-    private static void addDeposit() throws IOException {
-        LocalDate date = ConsoleHelper.promptForDate("Enter Date (YYYY-MM-DD)");  //collect the information from user
-        LocalTime time = ConsoleHelper.promptForTime("Enter Time (HH:MM:SS)");
+    private static void addDeposit() throws IOException {// throws IOException file writing might fail
+        LocalDate date = ConsoleHelper.promptForDate("Enter Date (YYYY-MM-DD)");  //ConsoleHelper.promptForDate() shows prompt and validates date format
+        LocalTime time = ConsoleHelper.promptForTime("Enter Time (HH:MM:SS)");// Returns a LocalTime object
         String description = ConsoleHelper.promptForString("Enter Description");
         String vendor = ConsoleHelper.promptForString("Enter Vendor");
         double amount = ConsoleHelper.promptForDouble("Enter Deposit Amount");
 
-         //adding descripion date vendor and amount to deposit & saving deposit
-        Payments deposit = new Payments(date, time, description, vendor, amount);
-        saveTransactionToFile(deposit); //saving deposit to csv
-        payments.add(deposit); //adding the deposit t
+         //creating a new deposit
+        Payments deposit = new Payments(date, time, description, vendor, amount); // Groups all related data into a single object
+        saveTransactionToFile(deposit); //saving deposit to CSV file memory list
+        payments.add(deposit);// add to memory Arraylist
 
         System.out.println("Deposit saved successfully!\n");
     }
 
+   // Prompts the user for payment (debit) information and saves it
+     // as a negative transaction.
     // ------------------- MAKE PAYMENT -------------------
     private static void makePayment() throws IOException {
         LocalDate date = ConsoleHelper.promptForDate("Enter Date (YYYY-MM-DD)");//collect the information from user
@@ -69,17 +73,23 @@ public class Main {
         String description = ConsoleHelper.promptForString("Enter Description");
         String vendor = ConsoleHelper.promptForString("Enter Vendor");
         double amount = ConsoleHelper.promptForDouble("Enter Payment Amount");
-        // saving date time description vendor                        // basically money leaving the account
-        Payments payment = new Payments(date, time, description, vendor, -Math.abs(amount));
-        saveTransactionToFile(payment); //saving payment to csv
+
+        //converting amount to a negitive                       // basically money leaving the account
+        Payments payment = new Payments(date, time, description, vendor, -Math.abs(amount));// -Math.abs(amount) ensures the amount is always negative
+        saveTransactionToFile(payment); //saving payment to CSV memory list
         payments.add(payment);
 
         System.out.println("Payment saved successfully!\n");
-    }
 
+
+    }
+    //Displays all transaction categories (All, Deposits, Payments, Reports)
+    // routes the user to the appropriate submenu.
     // ------------------- LEDGER MENU -------------------
     private static void ledgerMenu() throws FileNotFoundException {
         while (true) {
+            // SUBMENU LOOP stays in ledger menu until the user chooses to go back to the home screen
+            // uses the same infinite loop pattern as main menu
             System.out.println("""
                     =============================
                            Ledger Menu
@@ -116,17 +126,24 @@ public class Main {
     }
 
     // ------------------- DISPLAY TRANSACTIONS -------------------
-    private static void displayTransactions(String filter) {
-        List<Payments> sorted = new ArrayList<>(payments);
+    //this method handles all three view modes
+    private static void displayTransactions(String filter) {//filter can be "ALL", "DEPOSITS", or "PAYMENTS"
+
+        List<Payments> sorted = new ArrayList<>(payments);// creates a copy of the payments list
         sorted.sort((a, b) -> b.getDate().compareTo(a.getDate())); // sort transaction newest to oldest
 
+        System.out.println("----------------------------------------------------------------------------");
         System.out.printf("%-12s | %-8s | %-20s | %-15s | %10s%n",
                 "Date", "Time", "Description", "Vendor", "Amount");
         System.out.println("-".repeat(70));
 
-        for (Payments p : sorted) { //loop through transactions
-            if (filter.equals("DEPOSITS") && p.getAmount() < 0) continue;  //deposits show only skips if negitive
+        for (Payments p : sorted) { //loop through transactions //p is the current Payment object
+            if (filter.equals("DEPOSITS") && p.getAmount() < 0) continue;  //deposits show only skips if negitve
+                   // If showing deposits and the amount is negative (payment) then continue only positive numbers pass
+
             if (filter.equals("PAYMENTS") && p.getAmount() >= 0) continue;// payments show only skips if positive
+                                                                          // opposite of (deposit) only negitive numbers show
+
             System.out.printf("%-12s | %-8s | %-20s | %-15s | $%10.2f%n",
                     p.getDate(), p.getTime(), p.getDescription(), p.getVendor(), p.getAmount());
         }
@@ -178,40 +195,57 @@ public class Main {
 
     // ------------------- REPORT IMPLEMENTATIONS -------------------
     private static void reportMonthToDate() {// show transaction from 1st day of the month
-        LocalDate now = LocalDate.now();
+        System.out.println("==========================");
+        System.out.println("    Month   To   Date ");
+        System.out.println("==========================");
+        LocalDate now = LocalDate.now();// gets todays date
         payments.stream() //converting the arraylist into a stream
+                // a Stream is a sequence of elements supporting functional operations
 
-                //filter keeps transactions from the current month and year
+                //filter keeps transactions from the current month and year that match
                 .filter(p -> p.getDate().getYear() == now.getYear() //return same year
-                        && p.getDate().getMonth() == now.getMonth())  //return same month
+                        && p.getDate().getMonth() == now.getMonth())  //return same month  // both conditions must be true using &&
                 .forEach(System.out::println); //print the matching transaction and calling each string to  that payment
-    }
+    }          //.forEach(p -> System.out.println(p)): alternate
+              // prints each matching transaction as a toString method
 
-    private static void reportPreviousMonth() {  //show transactio from previous month
+    private static void reportPreviousMonth() {//show transaction from previous month
+        System.out.println("=====================");
+        System.out.println("  Previous   Month");
+        System.out.println("=====================");
         LocalDate now = LocalDate.now().minusMonths(1);//going back to the previous month by 1
         payments.stream()
                 .filter(p -> p.getDate().getYear() == now.getYear() // filter & keeps transactions from the previous month by year and month
                         && p.getDate().getMonth() == now.getMonth())
                 .forEach(System.out::println);//print matching transactions
+
     }
+//   
 
     private static void reportYearToDate() {// show all transactions from the start of year until now
-        int year = LocalDate.now().getYear();//current year
+        System.out.println("=====================");
+        System.out.println("Year     To    Date");
+        System.out.println("=====================");
+        int year = LocalDate.now().getYear();//current year gets year as a Integer
 
         payments.stream() //filter and keeps transaction from the current year
                 .filter(p -> p.getDate().getYear() == year)  //transaction from current year
                 .forEach(System.out::println); //print the matching transactions
     }
 
-    private static void reportPreviousYear() { // show all transactions from the last year
+    private static void reportPreviousYear() {// show all transactions from the last year
+        System.out.println("====================================");
+        System.out.println("      Previous years Payments   :");
+        System.out.println("====================================");
         int year = LocalDate.now().getYear() - 1;// calculating the previous year( minus 1)
         payments.stream()
                 .filter(p -> p.getDate().getYear() == year) // filter and keep transactions from previous year
                 .forEach(System.out::println);// print all the matching transactions
+
     }
 
     private static void searchByVendor() { //find transactions by the vendor
-        String vendor = ConsoleHelper.promptForString("Enter vendor name").toLowerCase();//asking the user for the vendor name & converting sting into lowercase
+        String vendor = ConsoleHelper.promptForString("Enter vendor name").toLowerCase();//asking the user for the vendor name & converting string into lowercase
         payments.stream()
                       //checking if vendor name contains the search
                 .filter(p -> p.getVendor().toLowerCase().contains(vendor))
@@ -220,10 +254,10 @@ public class Main {
 
     // ------------------- FILE HELPERS -------------------
     private static void saveTransactionToFile(Payments transaction) throws IOException {
-        boolean fileExists = new File(CSV_FILE).exists();// checks if file exist
+        boolean fileExists = new File(CSV_FILE).exists();// .exist checks if file exist
 
                                       //opens the file in append mode
-        try (FileWriter writer = new FileWriter(CSV_FILE, true)) {//if true it won't erase the old data
+        try (FileWriter writer = new FileWriter(CSV_FILE, true)) {//if true it won't erase the old data //If false  file would be erased before writing
 
             if (!fileExists) {   // if the file IS new you will write the column header first
                 writer.write("date,time,description,vendor,amount\n");
