@@ -1,6 +1,7 @@
 date,time,description,vendor,amount
 2025-10-14,22:22:22,gas,bp,10.00
-2025-02-15,22:23:22,mall,DTLR,35.00
+2025-02-15,22:23:22,mall,DTLR,35.00a
+
 2025-04-11,02:33:44,car payment,nc- cars,-500.00
 2025-05-11,22:22:22,Incoming deposit,Goldman sachs,17000.00
 2025-05-13,22:22:22,Incoming deposit ,Goldman Sachs,5000.00
@@ -20,3 +21,9 @@ date,time,description,vendor,amount
 2023-03-04,00:00,paycheck,Vangard,2500.00
 2024-03-04,00:00,paycheck,Vangard,20000.00
 2025-04-03,00:00,payment,goldman sacCHS,10000.00
+2025-09-10,02:03,payment,vangard,200.00
+2025-02-03,22:22:22,vwndor,hai,35.00
+2025-10-17,01:03:22,paycheck,goldman sachs,2000.00
+2025-10-17,01:03:22,car payment,nc cars,-500.00
+2025-10-17,03:22,paycheck,Goldman sachs,2000.00
+2025-10-17,03:04,car payment,cars.nc,-500.00

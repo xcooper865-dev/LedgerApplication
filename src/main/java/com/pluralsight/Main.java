@@ -128,10 +128,10 @@ public class Main {
     // ------------------- DISPLAY TRANSACTIONS -------------------
     //this method handles all three view modes
     //when the filter is all neither of the filter checks will match one another allowing you to see both pos+ and neg- numbers
-    private static void displayTransactions(String filter) {//filter can be "ALL", "DEPOSITS", or "PAYMENTS"
+    private static void displayTransactions(String filter) {//filter  can be "ALL", "DEPOSITS", or "PAYMENTS"
 
         List<Payments> sorted = new ArrayList<>(payments);// creates a copy of the payments list
-        sorted.sort((a, b) -> b.getDate().compareTo(a.getDate())); // sort transaction newest to oldest
+        sorted.sort((a, b) -> b.getDate().compareTo(a.getDate())); // Sort transaction newest to oldest
 
         System.out.println("----------------------------------------------------------------------------");
         System.out.printf("%-12s | %-8s | %-20s | %-15s | %10s%n",
@@ -146,11 +146,11 @@ public class Main {
                                                                           // opposite of (deposit) only negitive numbers show
             //if showing payments and the amount is positive (deposit) then continue only negitive numbers pass through
 
-            System.out.printf("%-12s | %-8s | %-20s | %-15s | $%10.2f%n", //this line prints everything
+            System.out.printf("%-12s | %-8s | %-20s | %-15s | $%10.2f%n",
 
                                                     //if the filter is equal to deposits and all negitives were skipped print deposit pos+
                                                     //if the filter is equal to payment and all positives were skipped print payment neg-
-                    p.getDate(), p.getTime(), p.getDescription(), p.getVendor(), p.getAmount());
+                    p.getDate(), p.getTime(), p.getDescription(), p.getVendor(), p.getAmount());//prints details for each transaction
         }
         System.out.println();
     }
@@ -278,31 +278,36 @@ public class Main {
     }
 
     private static void loadTransactionsFromFile() {
-        File file = new File(CSV_FILE);//file object being created that represents the CSV file
+        File file = new File(CSV_FILE);
+        if (!file.exists()) return;
 
-        if (!file.exists()) return; //If the file doesn't exist the method stops avoiding errors
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {// closes File Reader
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             reader.readLine(); // skip header
             String line;
-            while ((line = reader.readLine()) != null) {// reads the line until it retruns null= nothing
+            while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if (parts.length < 5) continue;//if the line doesn't have 5 parts skip
+                if (parts.length < 5) continue;
 
-                Payments p = new Payments( // creates a new payment object using the data above
-                        LocalDate.parse(parts[0]), //Date
-                        LocalTime.parse(parts[1]),//Time
-                        parts[2],        //Description
-                        parts[3],       //vendor
-                        Double.parseDouble(parts[4]) //amount
-                );
-                payments.add(p); // add payment object to payment list
+                try {
+                    Payments p = new Payments(
+                            LocalDate.parse(parts[0]),
+                            LocalTime.parse(parts[1]),
+                            parts[2],
+                            parts[3],
+                            Double.parseDouble(parts[4])
+                    );
+                    payments.add(p);
+                } catch (NumberFormatException e) {
+                    System.out.println("Skipping invalid amount: " + parts[4]);
+                }
             }
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
         }
     }
-}
+    ;
+        }
+
 //   public class Payments{
 //    @Override
 //       public String toString(){
